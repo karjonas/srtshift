@@ -1,0 +1,10 @@
+[package]
+name = "srtshift"
+version = "0.1.0"
+authors = ["Jonas Karlsson <jonaskarlsson@fripost.org>"]
+edition = "2018"
+
+[dependencies]
+subparse = "0.6.2"
+clap = "*"
+regex = "*"
