@@ -4,7 +4,6 @@ extern crate regex;
 use clap::{App, Arg};
 use regex::Regex;
 
-use std::error::Error;
 use std::fs::File;
 use std::io::Write;
 use std::path::Path;
@@ -70,11 +69,7 @@ fn write_srt_file(output_path: &str, entries: Vec<SubtitleEntry>) {
     let path = Path::new(output_path);
 
     let mut file = match File::create(&path) {
-        Err(why) => panic!(
-            "Couldn't create file {}: {}",
-            output_path,
-            why.description()
-        ),
+        Err(why) => panic!("Couldn't create file {}: {}", output_path, why.to_string()),
         Ok(file) => file,
     };
 
@@ -93,7 +88,7 @@ fn write_srt_file(output_path: &str, entries: Vec<SubtitleEntry>) {
     .unwrap();
 
     match file.write_all(srt_contents.as_bytes()) {
-        Err(why) => panic!("Couldn't write to {}: {}", output_path, why.description()),
+        Err(why) => panic!("Couldn't write to {}: {}", output_path, why.to_string()),
         Ok(_) => println!("Successfully wrote to {}", output_path),
     }
 }
