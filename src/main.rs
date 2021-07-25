@@ -1,5 +1,6 @@
 extern crate clap;
 extern crate regex;
+extern crate subparse;
 
 use clap::{App, Arg};
 use regex::Regex;
