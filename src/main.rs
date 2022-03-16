@@ -2,7 +2,7 @@ extern crate clap;
 extern crate regex;
 extern crate subparse;
 
-use clap::{App, Arg};
+use clap::{Command, Arg};
 use regex::Regex;
 
 use std::fs::File;
@@ -95,38 +95,38 @@ fn write_srt_file(output_path: &str, entries: Vec<SubtitleEntry>) {
 }
 
 fn main() {
-    let matches = App::new("srtshift")
-        .version("0.1.0")
+    let matches = Command::new("srtshift")
+        .version("0.1.1")
         .author("Jonas Karlsson <jonaskarlsson@fripost.org>")
         .about("Shift and trim SubRip files")
-        .setting(clap::AppSettings::AllowLeadingHyphen)
+        .allow_hyphen_values(true)
         .arg(
-            Arg::with_name("input")
-                .short("i")
+            Arg::new("input")
+                .short('i')
                 .long("input")
                 .takes_value(true)
                 .required(true)
                 .help("Input file"),
         )
         .arg(
-            Arg::with_name("output")
-                .short("o")
+            Arg::new("output")
+                .short('o')
                 .long("output")
                 .takes_value(true)
                 .required(true)
                 .help("Output file"),
         )
         .arg(
-            Arg::with_name("shift")
-                .short("s")
+            Arg::new("shift")
+                .short('s')
                 .long("shift")
                 .takes_value(true)
                 .required(true)
                 .help("Shift timestamps [+/-]hh:mm:ss,xxx"),
         )
         .arg(
-            Arg::with_name("cutafter")
-                .short("a")
+            Arg::new("cutafter")
+                .short('a')
                 .long("cutafter")
                 .takes_value(true)
                 .help("Cut timestamps after [+/-]hh:mm:ss,xxx"),
