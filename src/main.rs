@@ -104,7 +104,7 @@ fn main() {
             Arg::new("input")
                 .short('i')
                 .long("input")
-                .takes_value(true)
+                .num_args(1)
                 .required(true)
                 .help("Input file"),
         )
@@ -112,7 +112,7 @@ fn main() {
             Arg::new("output")
                 .short('o')
                 .long("output")
-                .takes_value(true)
+                .num_args(1)
                 .required(true)
                 .help("Output file"),
         )
@@ -120,7 +120,7 @@ fn main() {
             Arg::new("shift")
                 .short('s')
                 .long("shift")
-                .takes_value(true)
+                .num_args(1)
                 .required(true)
                 .help("Shift timestamps [+/-]hh:mm:ss,xxx"),
         )
@@ -128,16 +128,16 @@ fn main() {
             Arg::new("cutafter")
                 .short('a')
                 .long("cutafter")
-                .takes_value(true)
+                .num_args(1)
                 .help("Cut timestamps after [+/-]hh:mm:ss,xxx"),
         )
         .get_matches();
 
-    let shift = parse_timestamp(matches.value_of("shift").unwrap());
-    let cutafter = parse_timestamp(matches.value_of("cutafter").unwrap_or("99:99:99,999"));
+    let shift = parse_timestamp(matches.get_one::<String>("shift").unwrap());
+    let cutafter = parse_timestamp(matches.get_one::<String>("cutafter").unwrap_or(&String::from("99:99:99,999")));
 
-    let path = PathBuf::from(matches.value_of("input").unwrap());
-    let output_path = matches.value_of("output").unwrap();
+    let path = PathBuf::from(matches.get_one::<String>("input").unwrap());
+    let output_path = matches.get_one::<String>("output").unwrap();
     let file_content: String = read_file(&path);
 
     let format =

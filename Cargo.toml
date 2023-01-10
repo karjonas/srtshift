@@ -1,9 +1,9 @@
 [package]
 name = "srtshift"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Jonas Karlsson <jonaskarlsson@fripost.org>"]
 
 [dependencies]
 subparse = "0.7.0"
-clap = "3.1.6"
-regex = "1.5.5"
+clap = "4.0.32"
+regex = "1.7.1"
